@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Member;
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use function PHPUnit\Framework\isNull;
@@ -24,6 +25,23 @@ class TeamController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'Get data failed',
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
+
+    public function showByUserId($id) {
+        try {
+            $data = User::with('member.team')->where('id_user', $id)->get();
+            return response()->json([
+                'status' => true,
+                'message' => 'Data found',
+                'data' => $data
+        ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Get data fail',
                 'error' => $th->getMessage()
             ]);
         }
