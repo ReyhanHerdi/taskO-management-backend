@@ -47,6 +47,23 @@ class TeamController extends Controller
         }
     }
 
+    public function showByTeamId($id) {
+        try {
+            $data = Team::with('member.user')->where('id_team', $id)->get();
+            return response()->json([
+                'status' => true,
+                'message' => 'Data found',
+                'data' => $data
+        ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Get data fail',
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
+
     public function store(Request $request) {
         try {
             $request->validate([
