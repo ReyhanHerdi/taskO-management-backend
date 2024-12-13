@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\auth\LoginController;
 use App\Http\Controllers\api\auth\UserController;
 use App\Http\Controllers\api\TeamController;
 use App\Models\Team;
@@ -10,9 +11,13 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// Auth
+Route::get('/auth', [LoginController::class, 'authCheck']);
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/register', [UserController::class, 'store']);
+
 // User
 Route::get('/users', [UserController::class, 'index']);
-Route::post('/register', [UserController::class, 'store']);
 Route::put('/users/update/{id}', [UserController::class, 'update']);
 
 // Team
