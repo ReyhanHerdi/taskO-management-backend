@@ -24,5 +24,6 @@ Route::put('/users/update/{id}', [UserController::class, 'update']);
 Route::get('/teams', [TeamController::class, 'index']);
 Route::post('/teams', [TeamController::class, 'store']);
 Route::get('/user-teams/{id}', [TeamController::class, 'showByUserId']);
+Route::get('/team-members/{id}', [TeamController::class, 'showByTeamId']);
 Route::put('/teams/{id}', [TeamController::class, 'update']);
 Route::delete('/teams/{id}', [TeamController::class, 'delete']);
