@@ -14,4 +14,12 @@ class Member extends Model
         'team_id',
         'role'
     ];
+
+    public function team() {
+        return $this->hasMany(Team::class, 'id_team', 'team_id');
+    }
+
+    public function user() {
+        return $this->hasMany(User::class, 'id_user', 'user_id');
+    }
 }
