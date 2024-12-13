@@ -55,7 +55,8 @@ class TeamController extends Controller
         try {
             Member::create([
                 'user_id' => $userId,
-                'team_id' => $teamId
+                'team_id' => $teamId,
+                'role' => 'leader'
             ]);
 
             return response()->json([
@@ -80,7 +81,7 @@ class TeamController extends Controller
 
             Team::where('id_team', $id)->update([
                 'name_team' => $request->name_team,
-                'description' => $request->description
+                'description' => $request->description,
             ]);
 
             return response()->json([
