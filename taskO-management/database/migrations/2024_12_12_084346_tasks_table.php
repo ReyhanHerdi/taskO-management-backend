@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('due');
             $table->enum('status', ['done', 'ongoing', 'pending'])->default('pending');
             $table->timestamps();
-            $table->foreign('project_id')->references('id_project')->on('projects');
+            $table->foreign('project_id')->references('id_project')->on('projects')->onDelete('cascade');
         });
     }
 
