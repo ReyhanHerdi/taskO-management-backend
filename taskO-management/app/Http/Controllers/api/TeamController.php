@@ -15,7 +15,7 @@ class TeamController extends Controller
     public function index() {
         $data = Team::get();
         try {
-            $data_status = (!isNull($data)) ? 'Data found' : 'Data not found' ;
+            $data_status = (count($data) > 0) ? 'Data found' : 'Data not found' ;
             return response()->json([
                 'status' => true,
                 'message' => $data_status,
@@ -33,9 +33,10 @@ class TeamController extends Controller
     public function showByUserId($id) {
         try {
             $data = User::with('member.team')->where('id_user', $id)->get();
+            $data_status = (count($data) > 0) ? 'Data found' : 'Data not found' ;
             return response()->json([
                 'status' => true,
-                'message' => 'Data found',
+                'message' => $data_status,
                 'data' => $data
         ]);
         } catch (\Throwable $th) {
@@ -82,6 +83,25 @@ class TeamController extends Controller
                 'status' => true,
                 'message' => 'Insert data fail',
                 'error' =>$th->getMessage()
+            ]);
+        }
+    }
+
+    public function showProject($id) {
+        try {
+            $data = Team::with('project')->where('id_team', $id)->get();
+            $data_status = (count($data) > 0) ? 'Data found' : 'Data not foung' ;
+
+            return response()->json([
+                'status' => true,
+                'message' => $data_status,
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Data not found',
+                'error' => $th->getMessage()
             ]);
         }
     }
