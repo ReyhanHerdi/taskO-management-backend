@@ -17,4 +17,8 @@ class Team extends Model
     public function member() {
         return $this->hasMany(Member::class, 'team_id', 'id_team');
     }
+
+    public function project() {
+        return $this->hasMany(Project::class, 'team_id', 'id_team');
+    }
 }
