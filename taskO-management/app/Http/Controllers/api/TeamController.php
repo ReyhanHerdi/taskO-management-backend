@@ -87,6 +87,25 @@ class TeamController extends Controller
         }
     }
 
+    public function showProject($id) {
+        try {
+            $data = Team::with('project')->where('id_team', $id)->get();
+            $data_status = (count($data) > 0) ? 'Data found' : 'Data not foung' ;
+
+            return response()->json([
+                'status' => true,
+                'message' => $data_status,
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Data not found',
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
+
     public function memberStore($userId, $teamId) {
         try {
             Member::create([
