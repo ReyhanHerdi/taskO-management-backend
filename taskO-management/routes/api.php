@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\auth\LoginController;
 use App\Http\Controllers\api\auth\UserController;
+use App\Http\Controllers\api\ProjectController;
 use App\Http\Controllers\api\TeamController;
 use App\Models\Team;
 use Illuminate\Http\Request;
@@ -27,3 +28,10 @@ Route::get('/user-teams/{id}', [TeamController::class, 'showByUserId']);
 Route::get('/team-members/{id}', [TeamController::class, 'showByTeamId']);
 Route::put('/teams/{id}', [TeamController::class, 'update']);
 Route::delete('/teams/{id}', [TeamController::class, 'delete']);
+
+// Project
+Route::get('/projects', [ProjectController::class, 'index']);
+Route::get('projects-team/{id}', [ProjectController::class, 'showByTeamId']);
+Route::post('/projects', [ProjectController::class, 'store']);
+Route::put('/projects/{id}', [ProjectController::class, 'update']);
+Route::delete('projects/{id}', [ProjectController::class, 'destroy']);
