@@ -25,11 +25,28 @@ class UserController extends Controller
         }
     }
 
+    public function show($id) {
+        $data = User::where('id_user', $id)->first();
+        try {
+            return response()->json([
+                'status' => true,
+                'message' => 'Data found',
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Data not found',
+                'error' => $th
+            ]);
+        }
+    }
+
     public function store(Request $request) {
         try {
             $request->validate([
                 'name' => 'required',
-                'email' => ['required', 'email'],
+                'email' => ['required', 'email', 'unique:users,email'],
                 'password' => ['required', 'min:8']
             ]);
 

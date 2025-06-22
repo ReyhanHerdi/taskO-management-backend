@@ -12,10 +12,10 @@ class TaskExecutor extends Model
     ];
 
     public function user() {
-        return $this->hasMany(User::class, 'user_id', 'id_user');
+        return $this->hasMany(User::class, 'id_user', 'user_id');
     }
 
     public function task() {
-        return $this->hasMany(task::class, 'task_id', 'id_task');
+        return $this->hasMany(task::class, 'id_task', 'task_id');
     }
 }
