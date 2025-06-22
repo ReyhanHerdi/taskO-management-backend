@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Task;
 use App\Models\TaskExecutor;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -50,6 +51,23 @@ class TaskController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'Insert data fail',
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
+
+    public function taskByExecutor($id) {
+        try {
+            $data = TaskExecutor::with('task')->where('user_id', $id)->get();
+            return response()->json([
+                'status' => true,
+                'message' => 'Get data success',
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Get data has failed',
                 'error' => $th->getMessage()
             ]);
         }

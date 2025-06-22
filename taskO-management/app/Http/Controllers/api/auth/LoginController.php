@@ -13,7 +13,7 @@ class LoginController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'User has login',
-                'data' => 'Welcome, ' . $auth->user()->name
+                'data' => $auth->user()->id_user
             ]);
         } else {
             return response()->json([
