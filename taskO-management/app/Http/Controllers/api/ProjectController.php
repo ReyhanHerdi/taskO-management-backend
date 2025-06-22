@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Member;
 use App\Models\Project;
+use App\Models\Team;
+use App\Models\User;
 use Illuminate\Http\Request;
 use function PHPUnit\Framework\isNull;
 
@@ -29,6 +32,24 @@ class ProjectController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => 'Data not found',
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
+
+    public function showByUserId($id) {
+        try {
+            $data = Project::where('user_id', $id)->get();
+            $data_status = (count($data) > 0) ? 'Data found' : 'Data not found' ;
+            return response()->json([
+                'status' => true,
+                'message' => $data_status,
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => true,
+                'message' => "get data fail",
                 'error' => $th->getMessage()
             ]);
         }
