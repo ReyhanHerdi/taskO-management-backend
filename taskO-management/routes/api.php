@@ -35,6 +35,7 @@ Route::post('/member-store/{id}', [TeamController::class, 'memberStore']);
 
 // Project
 Route::get('/projects', [ProjectController::class, 'index']);
+Route::get('/project/{id}', [ProjectController::class, 'showByProjectId']);
 Route::get('projects-user/{id}', [ProjectController::class, 'showByUserId']); // Belom kepake
 Route::get('projects-team/{id}', [ProjectController::class, 'showByTeamId']);
 Route::post('/projects', [ProjectController::class, 'store']);
@@ -44,6 +45,8 @@ Route::delete('projects/{id}', [ProjectController::class, 'destroy']);
 // Task
 Route::get('/tasks', [TaskController::class, 'index']);
 Route::post('/tasks', [TaskController::class, 'store']);
+Route::get('/tasks-project/{id}', [TaskController::class, 'taskByProjectId']);
+Route::get('/tasks-done-project/{id}', [TaskController::class, 'taskDoneByProjectId']);
 Route::get('/task-executor/{id}', [TaskController::class, 'taskByExecutor']);
 Route::post('/task-executor', [TaskController::class, 'taskExecutorStore']);
 Route::put('/tasks/{id}', [TaskController::class, 'update']);
