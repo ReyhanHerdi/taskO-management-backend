@@ -22,4 +22,8 @@ class Project extends Model
     public function team() {
         return $this->belongsTo(Team::class, 'team_id', 'id_team');
     }
+    
+    public function task() {
+        return $this->hasMany(Task::class, 'project_id', 'id_project');
+    }
 }

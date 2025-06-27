@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use App\Models\Task;
 use App\Models\TaskExecutor;
 use App\Models\User;
@@ -54,6 +55,44 @@ class TaskController extends Controller
                 'error' => $th->getMessage()
             ]);
         }
+    }
+
+    public function taskByProjectId($id) {
+        try {
+            $data = Task::where('project_id', $id)->get();
+            $data_status = (count($data) > 0) ? 'Data found' : 'Data not found' ;
+            return response()->json([
+                'status' => true,
+                'message' => $data_status,
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Get data fail',
+                'error' => $th->getMessage()
+            ]);
+        }
+        
+    }
+
+    public function taskDoneByProjectId($id) {
+        try {
+            $data = Project::with('task')->where('id_project', $id)->get();
+            $data_status = (count($data) > 0) ? 'Data found' : 'Data not found' ;
+            return response()->json([
+                'status' => true,
+                'message' => $data_status,
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Get data fail',
+                'error' => $th->getMessage()
+            ]);
+        }
+        
     }
 
     public function taskByExecutor($id) {

@@ -17,4 +17,7 @@ class Task extends Model
     public function taskExecutor() {
         return $this->hasMany(TaskExecutor::class, 'task_id', 'id_task');
     }
+    public function project() {
+        return $this->belongsTo(Task::class, 'id_project', 'project_id');
+    }
 }
