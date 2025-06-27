@@ -37,6 +37,22 @@ class ProjectController extends Controller
         }
     }
 
+    public function showByProjectId($id) {
+        try {
+            $data = Project::where('id_project', $id)->first();
+            return response()->json([
+                'status' => true,
+                'message' => 'Data found',
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => "get data fail",
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
     public function showByUserId($id) {
         try {
             $data = Project::where('user_id', $id)->get();
@@ -57,7 +73,7 @@ class ProjectController extends Controller
 
     public function showByTeamId($id) {
         try {
-            $data = Project::where('team_id', $id)->get();
+            $data = Project::with('task')->where('team_id', $id)->get();
             $data_status = (count($data) > 0) ? 'Data found' : 'Data not found' ;
             return response()->json([
                 'status' => true,
