@@ -45,6 +45,7 @@ Route::delete('projects/{id}', [ProjectController::class, 'destroy']);
 // Task
 Route::get('/tasks', [TaskController::class, 'index']);
 Route::post('/tasks', [TaskController::class, 'store']);
+Route::get('/task/{id}', [TaskController::class, 'taskById']);
 Route::get('/tasks-project/{id}', [TaskController::class, 'taskByProjectId']);
 Route::get('/tasks-done-project/{id}', [TaskController::class, 'taskDoneByProjectId']);
 Route::get('/task-executor/{id}', [TaskController::class, 'taskByExecutor']);

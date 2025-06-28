@@ -57,6 +57,24 @@ class TaskController extends Controller
         }
     }
 
+    public function taskById($id) {
+        try {
+            $data = Task::where('id_task', $id)->first();
+            return response()->json([
+                'status' => true,
+                'message' => "Data found",
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => true,
+                'message' => "Data found",
+                'error' => $th->getMessage()
+            ]);
+        }
+        
+    }
+
     public function taskByProjectId($id) {
         try {
             $data = Task::where('project_id', $id)->get();
