@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name_project');
             $table->text('description')->nullable();
-            $table->dateTime('due');
+            $table->date('due');
             $table->enum('status', ['done', 'ongoing', 'pending'])->default('pending');
             $table->timestamps();
             $table->foreign('team_id')->references('id_team')->on('teams')->onDelete('cascade');
