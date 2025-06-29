@@ -35,13 +35,16 @@ class TaskController extends Controller
             $request->validate([
                 'project_id' => 'required',
                 'name_task' => 'required',
+                'due_date' => 'required',
+                'due_time' => 'required'
             ]);
 
             Task::create([
                 'project_id' => $request->project_id,
                 'name_task' => $request->name_task,
                 'description' => $request->description,
-                'due' => $request->due,
+                'due_date' => $request->due_date,
+                'due_time' => $request->due_time
             ]);
 
             return response()->json([
