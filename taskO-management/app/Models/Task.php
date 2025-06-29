@@ -10,7 +10,8 @@ class Task extends Model
         'project_id',
         'name_task',
         'description',
-        'due',
+        'due_date',
+        'due_time',
         'status'
     ];
 
