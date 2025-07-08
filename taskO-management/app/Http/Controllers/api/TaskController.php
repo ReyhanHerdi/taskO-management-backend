@@ -35,13 +35,16 @@ class TaskController extends Controller
             $request->validate([
                 'project_id' => 'required',
                 'name_task' => 'required',
+                'due_date' => 'required',
+                'due_time' => 'required'
             ]);
 
             Task::create([
                 'project_id' => $request->project_id,
                 'name_task' => $request->name_task,
                 'description' => $request->description,
-                'due' => $request->due,
+                'due_date' => $request->due_date,
+                'due_time' => $request->due_time
             ]);
 
             return response()->json([
@@ -116,6 +119,23 @@ class TaskController extends Controller
     public function taskByExecutor($id) {
         try {
             $data = TaskExecutor::with('task')->where('user_id', $id)->get();
+            return response()->json([
+                'status' => true,
+                'message' => 'Get data success',
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Get data has failed',
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
+
+    public function executorByTaskId($id) {
+        try {
+            $data = TaskExecutor::with('user')->where('task_id', $id)->get();
             return response()->json([
                 'status' => true,
                 'message' => 'Get data success',
