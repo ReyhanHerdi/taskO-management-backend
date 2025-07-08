@@ -133,6 +133,23 @@ class TaskController extends Controller
         }
     }
 
+    public function executorByTaskId($id) {
+        try {
+            $data = TaskExecutor::with('user')->where('task_id', $id)->get();
+            return response()->json([
+                'status' => true,
+                'message' => 'Get data success',
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Get data has failed',
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
+
     public function taskExecutorStore(Request $request) {
         try {
             $request->validate([
