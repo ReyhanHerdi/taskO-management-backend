@@ -68,7 +68,7 @@ class TeamController extends Controller
 
     public function showByTeamId($id) {
         try {
-            $data = Team::with('member.user')->where('id_team', $id)->get();
+            $data = Member::with('user')->where('team_id', $id)->get();
             return response()->json([
                 'status' => true,
                 'message' => 'Data found',
