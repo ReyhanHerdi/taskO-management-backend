@@ -133,6 +133,26 @@ class TaskController extends Controller
         }
     }
 
+    public function taskNotDoneByExecutor($id) {
+        try {
+            $data = TaskExecutor::with('task')
+                                    ->where('user_id', $id)
+                                    ->whereRelation('task', 'status', 'ongoing')
+                                    ->get();
+            return response()->json([
+                'status' => true,
+                'message' => 'Get data success',
+                'data' => $data
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Get data has failed',
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
+
     public function executorByTaskId($id) {
         try {
             $data = TaskExecutor::with('user')->where('task_id', $id)->get();

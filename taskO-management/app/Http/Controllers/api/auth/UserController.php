@@ -86,4 +86,24 @@ class UserController extends Controller
             ]);
         }  
     }
+
+    public function updateFcmToken(Request $request, $id)
+    {
+        try {
+            User::where('id_user', $id)->update([
+            'fcm_token' => $request->fcm_token,
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => 'Update data success',
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Update data fail',
+                'error' => $th->getMessage()
+            ]);
+        }
+    }
 }
