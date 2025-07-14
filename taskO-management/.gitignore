@@ -22,3 +22,4 @@ yarn-error.log
 /.vscode
 /.zed
 .json
+storage/firebase/firebase-credentials.json
