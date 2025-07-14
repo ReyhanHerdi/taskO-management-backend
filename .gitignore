@@ -22,3 +22,4 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 tasko-management-firebase-adminsdk-fbsvc-b9e4674ef1.json
+taskO-management/storage/firebase/firebase-credentials.json
