@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\auth\LoginController;
 use App\Http\Controllers\api\auth\UserController;
+use App\Http\Controllers\api\FirebaseController;
 use App\Http\Controllers\api\ProjectController;
 use App\Http\Controllers\api\TaskController;
 use App\Http\Controllers\api\TeamController;
@@ -49,8 +50,13 @@ Route::get('/task/{id}', [TaskController::class, 'taskById']);
 Route::get('/tasks-project/{id}', [TaskController::class, 'taskByProjectId']);
 Route::get('/tasks-done-project/{id}', [TaskController::class, 'taskDoneByProjectId']);
 Route::get('/task-executor/{id}', [TaskController::class, 'taskByExecutor']);
+Route::get('/task-ongoing-executor/{id}', [TaskController::class, 'taskNotDoneByExecutor']);
 Route::get('/task/executor/{id}', [TaskController::class, 'executorByTaskId']);
 Route::post('/task-executor', [TaskController::class, 'taskExecutorStore']);
 Route::put('/tasks/{id}', [TaskController::class, 'update']);
 Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
 Route::delete('/task-executor/{id}', [TaskController::class, 'taskExecutorDestroy']);
+
+// Firebase
+Route::put('/fcm-token/{id}', [UserController::class, 'updateFcmToken']);
+Route::post('/message', [FirebaseController::class, 'sendMessage']);
