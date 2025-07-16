@@ -32,7 +32,7 @@ Route::get('/team-members/{id}', [TeamController::class, 'showByTeamId']);
 Route::get('/team-projects/{id}', [TeamController::class, 'showProject']);
 Route::put('/teams/{id}', [TeamController::class, 'update']);
 Route::delete('/teams/{id}', [TeamController::class, 'delete']);
-Route::post('/member-store/{id}', [TeamController::class, 'memberStore']);
+Route::post('/member-store/{email}', [TeamController::class, 'memberStore']);
 
 // Project
 Route::get('/projects', [ProjectController::class, 'index']);
