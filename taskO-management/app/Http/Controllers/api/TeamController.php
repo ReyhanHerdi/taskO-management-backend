@@ -147,9 +147,10 @@ class TeamController extends Controller
 
     public function memberStore($id, Request $request) {
         try {
+            $user = User::where('email', $request->email)->first();
             Member::create([
                 'team_id' => $id,
-                'user_id' => $request->user_id
+                'user_id' => $user->id_user
             ]);
     
             return response()->json([
