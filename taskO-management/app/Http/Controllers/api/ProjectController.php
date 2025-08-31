@@ -124,13 +124,11 @@ class ProjectController extends Controller
                 'name_project' => 'required',
                 'description' => 'required',
                 'due' => 'required',
-                'status' => 'required'
             ]);
             Project::where('id_project', $id)->update([
                 'name_project' => $request->name_project,
                 'description' => $request->description,
-                'due' => $request->due,
-                'status' => $request->status   
+                'due' => $request->due,  
             ]);
 
             return response()->json([
