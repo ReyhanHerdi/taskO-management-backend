@@ -3,11 +3,14 @@
 use App\Http\Controllers\api\auth\LoginController;
 use App\Http\Controllers\api\auth\UserController;
 use App\Http\Controllers\api\FirebaseController;
+use App\Http\Controllers\api\ImageController;
+use App\Http\Controllers\api\MessageController;
 use App\Http\Controllers\api\ProjectController;
 use App\Http\Controllers\api\TaskController;
 use App\Http\Controllers\api\TeamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Mime\MessageConverter;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -56,6 +59,13 @@ Route::post('/task-executor', [TaskController::class, 'taskExecutorStore']);
 Route::put('/tasks/{id}', [TaskController::class, 'update']);
 Route::delete('/tasks/{id}', [TaskController::class, 'destroy']);
 Route::delete('/task-executor/{id}', [TaskController::class, 'taskExecutorDestroy']);
+
+// Image
+Route::post('/user/image/{id}', [ImageController::class, 'imageUpload']);
+
+// Message
+Route::get('/message/{id}', [MessageController::class, 'getMessage']);
+Route::post('/message', [MessageController::class, 'storeMessage']);
 
 // Firebase
 Route::put('/fcm-token/{id}', [UserController::class, 'updateFcmToken']);

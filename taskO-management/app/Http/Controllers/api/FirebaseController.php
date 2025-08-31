@@ -13,16 +13,16 @@ class FirebaseController extends Controller
     public function sendMessage(Request $request) {
         try {
             $firebase = new FirebaseService();
-            $message = [
-                'senderId' => (int) $request->sender_id,
-                'receiverId' => (int) $request->receiver_id,
-                'text' => $request->text,
-                'timestamp' => (int) $request->datetime
-            ];
+            // $message = [
+            //     'senderId' => (int) $request->sender_id,
+            //     'receiverId' => (int) $request->receiver_id,
+            //     'text' => $request->text,
+            //     'timestamp' => (int) $request->datetime
+            // ];
 
-            $messageRef = ($request->receiver_id < $request->sender_id) ? $request->receiver_id.'_'.$request->sender_id : $request->sender_id.'_'.$request->receiver_id ;
+            // $messageRef = ($request->receiver_id < $request->sender_id) ? $request->receiver_id.'_'.$request->sender_id : $request->sender_id.'_'.$request->receiver_id ;
 
-            $firebase->sendMessage($message, $messageRef);
+            // $firebase->sendMessage($message, $messageRef);
 
             $receiver = User::where('id_user', $request->receiver_id)->first();
             $sender = User::where('id_user', $request->sender_id)->first();
