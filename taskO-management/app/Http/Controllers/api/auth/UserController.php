@@ -71,8 +71,10 @@ class UserController extends Controller
 
     public function update(Request $request, $id) {
         try {
-            $request->validate(['name' => 'required']);
-            User::where('id_user', $id)->update(['name' => $request->name]);
+            User::where('id_user', $id)->update([
+                'name' => $request->name,
+                'photoUrl' => $request->photoUrl
+            ]);
 
             return response()->json([
                 'status' => true,
