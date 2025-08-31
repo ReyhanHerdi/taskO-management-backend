@@ -198,10 +198,10 @@ class TaskController extends Controller
     public function update($id, Request $request) {
         try {
             Task::where('id_task', $id)->update([
-                // 'name_task' => $request->name_task,
-                // 'description' => $request->description,
-                // 'due_date' => $request->due_date,
-                // 'due_time' => $request->due_time,
+                'name_task' => $request->name_task,
+                'description' => $request->description,
+                'due_date' => $request->due_date,
+                'due_time' => $request->due_time,
                 'status' => $request->status
             ]);
 
