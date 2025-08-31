@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->dropColumn('due_time');
-            $table->time('due_time')->after('due_date');
-        });
+        if (!Schema::hasColumn('tasks', 'due_time')) {
+            Schema::table('tasks', function (Blueprint $table) {
+                $table->time('due_time')->nullable();
+            });
+        }
     }
 
     /**
