@@ -65,8 +65,8 @@ Route::post('/user/image/{id}', [ImageController::class, 'imageUpload']);
 
 // Message
 Route::get('/message/{id}', [MessageController::class, 'getMessage']);
-Route::post('/message', [MessageController::class, 'storeMessage']);
+Route::post('/message/send', [MessageController::class, 'storeMessage']);
 
 // Firebase
 Route::put('/fcm-token/{id}', [UserController::class, 'updateFcmToken']);
-Route::post('/message', [FirebaseController::class, 'sendMessage']);
+// Route::post('/message/send', [FirebaseController::class, 'sendMessage']);
