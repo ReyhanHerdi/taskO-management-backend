@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Helper\PushNotificationHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Task;
@@ -228,6 +229,7 @@ class TaskController extends Controller
                 'task_id' => $taskId,
                 'user_id' => $userId
             ]);
+            PushNotificationHelper::sendPushNotification($userId, 'Tugas Baru', 'Anda mendapatkan tugas baru');
         } catch (\Throwable $th) {
             return false;
         }
