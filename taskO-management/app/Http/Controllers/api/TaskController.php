@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\Task;
 use App\Models\TaskExecutor;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
@@ -197,6 +196,11 @@ class TaskController extends Controller
 
     public function update($id, Request $request) {
         try {
+            $task = Task::where('id_task', $id)->first();
+            if ($task->status = 'pending') {
+                $this->storeTaskExecutor($id, $request->user_id);
+            }
+
             Task::where('id_task', $id)->update([
                 'name_task' => $request->name_task,
                 'description' => $request->description,
@@ -215,6 +219,17 @@ class TaskController extends Controller
                 'message' => 'Update data fail',
                 'error' => $th->getMessage()
             ]);
+        }
+    }
+
+    private function storeTaskExecutor($taskId, $userId) {
+        try {
+            TaskExecutor::create([
+                'task_id' => $taskId,
+                'user_id' => $userId
+            ]);
+        } catch (\Throwable $th) {
+            return false;
         }
     }
 
