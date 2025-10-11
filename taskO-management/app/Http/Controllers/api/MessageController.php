@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Helper\PushNotificationHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -68,6 +70,8 @@ class MessageController extends Controller
 
             $setUserIdAndUser2Id = $this->setUserIdAndUser2Id($request->user_id, $request->user2_id);
 
+            $user = User::where('id_user', $request->user_id)->first();
+            PushNotificationHelper::sendPushNotification($request->user2_id, $user->name, $request->message);
             $message = Message::where('id_message', $request->message_id)->first();
             if ($message) {
                 Message::where('id_message', $request->message_id)->update([
