@@ -16,6 +16,6 @@ class TaskExecutor extends Model
     }
 
     public function task() {
-        return $this->hasMany(task::class, 'id_task', 'task_id');
+        return $this->hasMany(Task::class, 'id_task', 'task_id');
     }
 }
